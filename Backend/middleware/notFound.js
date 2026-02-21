@@ -1,0 +1,8 @@
+// middleware/notFound.js — 404 handler for unmatched routes
+const ApiError = require('../utils/ApiError');
+
+const notFound = (req, _res, next) => {
+    next(new ApiError(404, `Route not found: ${req.originalUrl}`));
+};
+
+module.exports = notFound;

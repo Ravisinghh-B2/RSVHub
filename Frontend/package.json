@@ -1,0 +1,22 @@
+{
+    "name": "rsv-frontend",
+    "version": "1.0.0",
+    "description": "Frontend for the RSV Video Platform",
+    "main": "index.html",
+    "scripts": {
+        "start": "browser-sync start --server --files '*.html, Frontend/css/*.css, Frontend/js/*.js' --port 5500",
+        "dev": "browser-sync start --server --files '*.html, Frontend/css/*.css, Frontend/js/*.js' --port 5500",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "video",
+        "platform",
+        "youtube-clone",
+        "frontend"
+    ],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "browser-sync": "^3.0.3"
+    }
+}

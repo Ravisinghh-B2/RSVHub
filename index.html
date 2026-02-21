@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RSV — Video Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Frontend/css/style.css" />
+</head>
+
+<body>
+
+  <!-- ══ NAVBAR ══════════════════════════════════════════════ -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="logo">
+        <svg viewBox="0 0 90 20" class="logo-svg" aria-label="RSV Logo">
+          <text x="0" y="16" class="logo-text">RSV</text>
+        </svg>
+      </a>
+    </div>
+
+    <div class="nav-center">
+      <form class="search-form" id="searchForm" role="search">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search videos..." autocomplete="off"
+          aria-label="Search" />
+        <button type="submit" class="search-btn" aria-label="Search">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+          </svg>
+        </button>
+      </form>
+    </div>
+
+    <div class="nav-right">
+      <button class="search-toggle-btn" id="searchToggleBtn" aria-label="Search">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+        </svg>
+      </button>
+      <div id="authSection">
+        <!-- Populated by auth.js -->
+      </div>
+    </div>
+  </header>
+  <!-- ══════════════════════════════════════════════════════════ -->
+
+  <!-- Sidebar overlay (mobile backdrop) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-layout">
+
+    <!-- ══ SIDEBAR ════════════════════════════════════════════ -->
+    <aside class="sidebar" id="sidebar">
+      <nav class="sidebar-nav">
+        <button class="sidebar-item active" data-category="all">
+          <svg viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+          </svg>
+          <span>Home</span>
+        </button>
+        <button class="sidebar-item" data-category="trending">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
+          </svg>
+          <span>Trending</span>
+        </button>
+        <div class="sidebar-divider"></div>
+        <p class="sidebar-label">CATEGORIES</p>
+        <button class="sidebar-item" data-category="music">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
+          </svg>
+          <span>Music</span>
+        </button>
+        <button class="sidebar-item" data-category="gaming">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M15 7.5V2H9v5.5l3 3 3-3zM7.5 9H2v6h5.5l3-3-3-3zM9 16.5V22h6v-5.5l-3-3-3 3zM16.5 9l-3 3 3 3H22V9h-5.5z" />
+          </svg>
+          <span>Gaming</span>
+        </button>
+        <button class="sidebar-item" data-category="education">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z" />
+          </svg>
+          <span>Education</span>
+        </button>
+        <button class="sidebar-item" data-category="comedy">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z" />
+          </svg>
+          <span>Comedy</span>
+        </button>
+        <button class="sidebar-item" data-category="fitness">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z" />
+          </svg>
+          <span>Fitness</span>
+        </button>
+        <button class="sidebar-item" data-category="technology">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z" />
+          </svg>
+          <span>Technology</span>
+        </button>
+        <button class="sidebar-item" data-category="news">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z" />
+          </svg>
+          <span>News</span>
+        </button>
+      </nav>
+    </aside>
+    <!-- ══════════════════════════════════════════════════════ -->
+
+    <!-- ══ MAIN CONTENT ════════════════════════════════════════ -->
+    <main class="main-content" id="mainContent">
+
+      <!-- Category chips (horizontal scroll) -->
+      <div class="chips-bar" id="chipsBar">
+        <button class="chip active" data-category="all">All</button>
+        <button class="chip" data-category="trending">Trending</button>
+        <button class="chip" data-category="music">Music</button>
+        <button class="chip" data-category="gaming">Gaming</button>
+        <button class="chip" data-category="education">Education</button>
+        <button class="chip" data-category="comedy">Comedy</button>
+        <button class="chip" data-category="fitness">Fitness</button>
+        <button class="chip" data-category="technology">Technology</button>
+        <button class="chip" data-category="news">News</button>
+      </div>
+
+      <!-- Search results banner (hidden by default) -->
+      <div class="search-banner hidden" id="searchBanner">
+        <span>Search results for: <strong id="searchQuery"></strong></span>
+        <button class="clear-search" id="clearSearch">✕ Clear</button>
+      </div>
+
+      <!-- Video grid -->
+      <div class="video-grid" id="videoGrid">
+        <!-- Populated by main.js -->
+      </div>
+
+      <!-- Loading spinner -->
+      <div class="spinner hidden" id="spinner">
+        <div class="spinner-ring"></div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="empty-state hidden" id="emptyState">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+        </svg>
+        <p>No videos found</p>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+
+    </main>
+    <!-- ══════════════════════════════════════════════════════ -->
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 RSV Video Platform. All rights reserved.</p>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay hidden" id="loginModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h2 id="modalTitle">Sign In</h2>
+      <div class="modal-tabs">
+        <button class="modal-tab active" id="tabLogin">Login</button>
+        <button class="modal-tab" id="tabRegister">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form">
+        <input type="email" id="loginEmail" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="loginPassword" placeholder="Password" required />
+        <button type="submit" class="btn-primary">Sign In</button>
+        <p class="auth-msg" id="loginMsg"></p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="auth-form hidden">
+        <input type="text" id="regUsername" placeholder="Username" required />
+        <input type="email" id="regEmail" placeholder="Email" required autocomplete="email" />
+        <input type="password" id="regPassword" placeholder="Password (min 8 chars)" required />
+        <button type="submit" class="btn-primary">Create Account</button>
+        <p class="auth-msg" id="registerMsg"></p>
+      </form>
+    </div>
+  </div>
+
+  <script src="Frontend/js/auth.js"></script>
+  <script src="Frontend/js/main.js"></script>
+</body>
+
+</html>
