@@ -1,7 +1,8 @@
 /* ============================================================
    watch.js — Video watch page: player, info, related videos
    ============================================================ */
-const API = '/api/v1';
+// Root Cause Fix: Backend is on 5000, Frontend on 5500. Needs absolute URL.
+const API = 'http://localhost:5000/api/v1';
 
 const spinner = document.getElementById('spinner');
 const playerContainer = document.getElementById('playerContainer');

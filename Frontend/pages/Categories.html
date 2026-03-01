@@ -4,23 +4,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Categories - PussyHub</title>
+  <title>Categories - RSV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../Frontend/css/style.css" />
+  <script src="../Frontend/js/theme.js"></script>
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="nav-container">
-      <div class="logo">
-        <img src="../Frontend/assets/logo.jpg" alt="PussyHub Logo" />
-        <span class="logo-name">PussyHub</span>
-      </div>
-      <ul class="nav-links">
-        <li><a href="../index.html" class="nav-btn">Home</a></li>
-        <li><a href="Categories.html" class="nav-btn active">Categories</a></li>
-      </ul>
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="../index.html" class="logo">
+        <svg viewBox="0 0 90 20" class="logo-svg" aria-label="RSV Logo">
+          <text x="0" y="16" class="logo-text">RSV</text>
+        </svg>
+      </a>
     </div>
-  </nav>
+    <div class="nav-right">
+      <a href="../index.html" class="btn-signin">Home</a>
+      <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+        <svg viewBox="0 0 24 24"></svg>
+      </button>
+    </div>
+  </header>
 
   <main>
     <section class="categories">
@@ -61,7 +68,7 @@
   </main>
 
   <footer class="footer">
-    <p>&copy; 2025 PussyHub</p>
+    <p>&copy; 2026 RSV Video Platform</p>
     <a href="terms.html">Terms</a> |
     <a href="privacy.html">Privacy</a>
   </footer>

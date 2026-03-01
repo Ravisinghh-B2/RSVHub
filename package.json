@@ -1,0 +1,36 @@
+{
+    "name": "rsv-platform",
+    "version": "1.0.0",
+    "description": "Root configuration for the RSV Video Platform",
+    "main": "Backend/server.js",
+    "scripts": {
+        "start": "node Backend/server.js",
+        "dev": "nodemon Backend/server.js",
+        "frontend": "live-server Frontend",
+        "server": "npm run dev",
+        "client": "npm run frontend",
+        "all": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "keywords": [
+        "video",
+        "platform",
+        "youtube-clone",
+        "fullstack"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.5",
+        "express": "^4.19.2",
+        "jsonwebtoken": "^9.0.2",
+        "mongoose": "^8.4.1",
+        "multer": "^1.4.5-lts.1"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2",
+        "live-server": "^1.2.2",
+        "nodemon": "^3.1.2"
+    }
+}

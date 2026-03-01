@@ -2,7 +2,8 @@
    auth.js — JWT-based login/register modal for all pages
    Exports: loadAuthState(), openLoginModal()
    ============================================================ */
-const API_AUTH = '/api/v1/auth';
+// Root Cause Fix: Backend is on 5000, Frontend on 5500. Needs absolute URL.
+const API_AUTH = 'http://localhost:5000/api/v1/auth';
 
 // ── Storage ───────────────────────────────────────────────────
 const getToken = () => localStorage.getItem('rsv_token');
@@ -23,8 +24,8 @@ const loadAuthState = () => {
   const user = getUser();
   if (user && getToken()) {
     section.innerHTML = `
-      <div style="display:flex;align-items:center;gap:8px">
-        <span style="font-size:13px;color:var(--text-muted)">${user.username}</span>
+      <div class="auth-user-info">
+        <span class="username-label">${user.username}</span>
         <button class="profile-btn" title="${user.username}">${user.username[0].toUpperCase()}</button>
         <button class="btn-signin" id="logoutBtn">Logout</button>
       </div>`;
@@ -87,6 +88,13 @@ loginForm?.addEventListener('submit', async (e) => {
     if (!json.success) throw new Error(json.message);
 
     saveAuth(json.data.accessToken, json.data.user);
+
+    // Apply user theme if returned from backend
+    if (json.data.user.theme && window.ThemeManager) {
+      window.ThemeManager.applyTheme(json.data.user.theme);
+      localStorage.setItem('user-theme', json.data.user.theme);
+    }
+
     msg.className = 'auth-msg success';
     msg.textContent = `Welcome back, ${json.data.user.username}!`;
     setTimeout(() => { closeLoginModal(); loadAuthState(); }, 800);

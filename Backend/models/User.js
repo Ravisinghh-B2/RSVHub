@@ -38,6 +38,11 @@ const userSchema = new mongoose.Schema(
             type: String,
             select: false,
         },
+        theme: {
+            type: String,
+            enum: ['serika-dark', 'carbon', 'dracula', 'night-runner', 'terminal'],
+            default: 'serika-dark',
+        },
     },
     { timestamps: true }
 );

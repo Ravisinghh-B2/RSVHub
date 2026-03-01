@@ -1,7 +1,9 @@
 /* ============================================================
    main.js — RSV Homepage: video grid, search, category filter
    ============================================================ */
-const API = '/api/v1';
+// Root Cause Fix: We need the full URL when frontend (5500) and backend (5000) are on different ports.
+const API_BASE = 'http://localhost:5000/api/v1';
+const API = API_BASE; // Keeping API name for compatibility with existing code
 const ITEMS_PER_PAGE = 20;
 
 let currentCategory = 'all';

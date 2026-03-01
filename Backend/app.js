@@ -22,13 +22,13 @@ app.use(
     helmet({
         contentSecurityPolicy: {
             directives: {
-                defaultSrc: ["'self'"],
-                scriptSrc: ["'self'", "'unsafe-inline'"],
+                defaultSrc: ["'self'", "http://localhost:5000"],
+                scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
                 styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-                fontSrc: ["'self'", "https://fonts.gstatic.com"],
+                fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
                 imgSrc: ["'self'", "data:", "https:", "http:"],
                 frameSrc: ["'self'", "https://www.youtube.com", "https://youtube.com"],
-                connectSrc: ["'self'", "http://localhost:5000"],
+                connectSrc: ["'self'", "http://localhost:5000", "http://localhost:5500", "http://127.0.0.1:5500", "http://127.0.0.1:5000"],
             },
         },
         crossOriginEmbedderPolicy: false,
@@ -40,10 +40,10 @@ app.use(
 // ───────────────────────────────────────────────
 app.use(
     cors({
-        origin: true,
+        origin: ['http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:5000'],
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     })
 );
 
@@ -79,14 +79,16 @@ app.use('/api', routes);
 
 // ───────────────────────────────────────────────
 // 8. Serve Frontend Static Files
-//    Project root = c:\web\RSV (one level above Backend/)
 // ───────────────────────────────────────────────
 const projectRoot = path.join(__dirname, '..');
-app.use(express.static(projectRoot));
+const frontendPath = path.join(projectRoot, 'Frontend');
+
+// Unified static serving for all frontend assets and pages
+app.use(express.static(frontendPath));
 
 // Serve index.html for the root URL
 app.get('/', (_req, res) => {
-    res.sendFile(path.join(projectRoot, 'index.html'));
+    res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
 // ───────────────────────────────────────────────

@@ -1,0 +1,35 @@
+:root {
+    /* Font family - updated by ThemeManager */
+    --font-main: 'Inter', sans-serif;
+
+    /* Theme Tokens (Defaults to Serika Dark) */
+    --bg-primary: #323437;
+    --bg-secondary: #2c2e31;
+    --text-primary: #d1d0c5;
+    --text-secondary: #646669;
+    --accent: #e2b714;
+    --border-color: #2c2e31;
+    --card-bg: #2c2e31;
+    --button-bg: #e2b714;
+    --button-hover: #d1d0c5;
+    --input-bg: #2c2e31;
+
+    /* Common Tokens */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.6;
+}

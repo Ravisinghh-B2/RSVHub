@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Showcase - RSV</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 2rem;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .theme-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .theme-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .theme-card.active {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--accent);
+        }
+
+        .preview-section {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .demo-btn {
+            background: var(--button-bg);
+            color: var(--bg-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        .demo-input {
+            background: var(--input-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+
+        .demo-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-container">
+        <h1>Global Theme System Showcase</h1>
+        <p>Select a theme to see the entire application update instantly.</p>
+
+        <div class="theme-grid" id="themeGrid">
+            <!-- Themes injected here -->
+        </div>
+
+        <div class="preview-section">
+            <h2>Component Preview</h2>
+            <p>This is a paragraph using <code>--text-secondary</code>. The headings use <code>--text-primary</code>.
+            </p>
+
+            <div style="margin-bottom: 2rem;">
+                <input type="text" class="demo-input" placeholder="Sample Input Field">
+                <button class="demo-btn">Primary Action</button>
+                <button
+                    style="border: 1px solid var(--accent); color: var(--accent); padding: 0.75rem 1.5rem; border-radius: var(--border-radius);">Secondary
+                    Action</button>
+            </div>
+
+            <div class="theme-grid">
+                <div class="demo-card">
+                    <h3>Card Title</h3>
+                    <p>Cards use <code>--card-bg</code> and <code>--border-color</code>.</p>
+                </div>
+                <div class="demo-card">
+                    <h3>Accent Color</h3>
+                    <div style="height: 4px; background: var(--accent); width: 100%; border-radius: 2px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem; text-align: center;">
+            <a href="../index.html" style="color: var(--accent);">← Back to Dashboard</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../themes.js"></script>
+    <script src="../themeManager.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeGrid = document.getElementById('themeGrid');
+
+            // Render theme cards
+            Object.keys(window.themes).forEach(id => {
+                const theme = window.themes[id];
+                const card = document.createElement('div');
+                card.className = `theme-card ${ThemeManager.currentTheme === id ? 'active' : ''}`;
+                card.innerHTML = `
+                    <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎨</div>
+                    <div style="font-weight: 700;">${theme.name}</div>
+                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.5rem;">${theme.font}</div>
+                `;
+
+                card.onclick = () => {
+                    ThemeManager.saveTheme(id);
+                    document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                };
+
+                themeGrid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+
+</html>

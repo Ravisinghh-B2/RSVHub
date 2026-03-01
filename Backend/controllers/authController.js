@@ -41,6 +41,7 @@ const register = asyncHandler(async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        theme: user.theme,
         createdAt: user.createdAt,
     };
 
@@ -76,6 +77,7 @@ const login = asyncHandler(async (req, res) => {
         username: user.username,
         email: user.email,
         role: user.role,
+        theme: user.theme,
     };
 
     res
